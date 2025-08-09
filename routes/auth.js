@@ -133,7 +133,7 @@ router.post('/verify', async (req, res) => {
               // Only update name if it doesn't exist (preserve user's custom name)
               ...(user.name ? {} : { name: decodedToken.name || decodedToken.email.split('@')[0] }),
               photoURL: decodedToken.picture || null,
-              isAdmin: decodedToken.email === 'hiteshboss@gmail.com',
+              isAdmin: decodedToken.email === 'sujalparmar@gmail.com',
               lastLogin: new Date()
             }
           },
@@ -155,7 +155,7 @@ router.post('/verify', async (req, res) => {
                 // Only update name if it doesn't exist (preserve user's custom name)
                 ...(user.name ? {} : { name: decodedToken.name || decodedToken.email.split('@')[0] }),
                 photoURL: decodedToken.picture || null,
-                isAdmin: decodedToken.email === 'hiteshboss@gmail.com',
+                isAdmin: decodedToken.email === 'sujalparmar@gmail.com',
                 lastLogin: new Date()
               }
             },
@@ -170,7 +170,7 @@ router.post('/verify', async (req, res) => {
               email: decodedToken.email,
               name: decodedToken.name || decodedToken.email.split('@')[0],
               photoURL: decodedToken.picture || null,
-              isAdmin: decodedToken.email === 'hiteshboss@gmail.com',
+              isAdmin: decodedToken.email === 'sujalparmar@gmail.com',
               // Set default values for semester and branch to avoid validation errors
               semester: '',
               branch: '',
@@ -188,7 +188,7 @@ router.post('/verify', async (req, res) => {
                 email: decodedToken.email,
                 name: decodedToken.name || decodedToken.email.split('@')[0],
                 photoURL: decodedToken.picture || null,
-                isAdmin: decodedToken.email === 'hiteshboss@gmail.com',
+                isAdmin: decodedToken.email === 'sujalparmar@gmail.com',
                 // Set to empty string which should be valid
                 semester: '',
                 branch: '',
