@@ -26,7 +26,7 @@ const auth = async (req, res, next) => {
           email: decodedToken.email,
           name: decodedToken.name || decodedToken.email.split('@')[0],
           photoURL: decodedToken.picture || null,
-          isAdmin: decodedToken.email === 'hiteshboss@gmail.com',
+          isAdmin: decodedToken.email === 'sujalparmar@gmail.com',
           lastLogin: new Date()
         }
       },
