@@ -31,29 +31,30 @@ router.post('/admin/login', async (req, res) => {
     try {
       console.log('Creating Firebase custom token for admin...');
       
-      // First, make sure the admin user exists in Firebase
+      // Ensure the admin user in Firebase has the correct details
       try {
-        // Try to get the user first
-        await admin.auth().getUser(adminUid);
-        console.log('Admin user exists in Firebase');
-      } catch (userError) {
-        // If user doesn't exist, create it
-        if (userError.code === 'auth/user-not-found') {
-          try {
-            await admin.auth().createUser({
-              uid: adminUid,
-              email: 'sujalparmar@gmail.com',
-              displayName: 'Admin User'
-            });
-            console.log('Created admin user in Firebase');
-          } catch (createError) {
-            // If we can't create the user, just log the error but continue
-            // This might happen if the user already exists but we got a different error
-            console.error('Note: Could not create admin user:', createError.message);
-          }
+        const userRecord = await admin.auth().getUser(adminUid);
+        console.log('Admin user exists in Firebase. Verifying email...');
+        if (userRecord.email !== 'sujalparmar@gmail.com') {
+          console.log('Admin user has incorrect email. Updating...');
+          await admin.auth().updateUser(adminUid, {
+            email: 'sujalparmar@gmail.com',
+            displayName: 'Admin User'
+          });
+          console.log('Admin user email updated successfully.');
+        }
+      } catch (error) {
+        if (error.code === 'auth/user-not-found') {
+          console.log('Admin user not found in Firebase. Creating...');
+          await admin.auth().createUser({
+            uid: adminUid,
+            email: 'sujalparmar@gmail.com',
+            displayName: 'Admin User'
+          });
+          console.log('Admin user created successfully.');
         } else {
-          // Log other errors but continue
-          console.error('Note: Error checking admin user:', userError.message);
+          console.error('Error managing Firebase admin user:', error);
+          throw new Error('Could not configure admin user in Firebase.');
         }
       }
       
