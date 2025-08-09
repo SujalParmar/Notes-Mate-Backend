@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: note-mate-backend
+    env: node
+    buildCommand: npm install
+    startCommand: node server.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: FRONTEND_URL
+        fromGroup: note-mate-env
+      - key: MONGODB_URI
+        fromGroup: note-mate-env
+      - key: JWT_SECRET
+        fromGroup: note-mate-env
+      - key: CLOUDINARY_CLOUD_NAME
+        fromGroup: note-mate-env
+      - key: CLOUDINARY_API_KEY
+        fromGroup: note-mate-env
+      - key: CLOUDINARY_API_SECRET
+        fromGroup: note-mate-env
